@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'custom-teal-dark': '#063a49',
+                        'custom-teal': '#1a4e69',
+                        'blue-fb': '#0866ff',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen overflow-x-hidden font-sans bg-white">
+    <div class="flex min-h-screen relative z-10">
+        <div id="mainContentWrapper" class="flex-1 flex flex-col">
+            <header>
+                <nav class="bg-gradient-to-br from-custom-teal/90 via-custom-teal-dark/90 to-custom-teal/90 shadow-sm relative sticky top-0 z-50">
+                    <div class="container mx-auto px-6 py-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <a href="#">
+                                    <img class="h-14" src="https://pelaut.dephub.go.id/assets/images/logo-kemenhub1.png" alt="Pelaut">
+                                </a>
+                            </div>
+                            <div class="hidden md:flex items-center space-x-6">
+                                <div class="flex items-center space-x-12 align-center mx-auto text-base text-white">
+                                    <a href="#" class="hover:text-blue-fb"
+                                        data-lang-key="home">Home</a>
+                                    <a href="#" class="hover:text-blue-fb" data-lang-key="product">Information</a>
+                                    <a href="#" class="hover:text-blue-fb" data-lang-key="plan">MoU</a>
+                                    <a href="#" class="hover:text-blue-fb" data-lang-key="contact">Verification</a>
+                                </div>
+                            </div>
+                            <div class="md:hidden">
+                                <button id="mobile-menu-button" class="text-white hover:text-blue-400 focus:outline-none">
+                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-white shadow-lg">
+                        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                            <a href="#" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-white hover:bg-blue-400 border-b border-gray-400" data-lang-key="home">Home</a>
+                            <a href="#" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-white hover:bg-blue-400 border-b border-gray-400" data-lang-key="product">Information</a>
+                            <a href="#" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-white hover:bg-blue-400 border-b border-gray-400" data-lang-key="plan">MoU</a>
+                            <a href="#" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-white hover:bg-blue-400" data-lang-key="contact">Verification</a>
+                        </div>
+                </nav>
+            </header>
+
+            <div class="relative min-h-screen flex items-center justify-center p-4 py-20">
+                <div class="w-full max-w-5xl mx-auto">
+                    <h2 class="text-center text-3xl lg:text-4xl font-bold text-gray-800 mb-10 tracking-wide">
+                        Validasi Data Pelaut
+                    </h2>
+                    <div class="grid lg:grid-cols-2 gap-0 bg-white/10 rounded-3xl shadow-2xl overflow-hidden border border-white/20 animate-fade-in">
+
+                        <div class="p-12 flex flex-col justify-center bg-white/5">
+                            <form method="GET" action="home.html" class="space-y-6 animate-slide-up" style="animation-delay: 0.2s;">
+                                <div class="group">
+                                    <label for="username" class="block text-gray-800 text-lg font-medium mb-2 group-focus-within:text-blue-300 transition-colors">
+                                        Nama
+                                    </label>
+                                    <div class="relative">
+                                        <input
+                                            type="text"
+                                            id="username"
+                                            name="Nama"
+                                            required
+                                            class="w-full px-4 py-4 bg-white/10 border text-black border-gray-800 rounded-xl text-black placeholder-black/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-custom-blue focus:border-transparent transition-all duration-300 hover:bg-white/15"
+                                            placeholder="Masukkan Nama">
+                                        <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400/0 via-custom-blue/0 to-blue-400/0 group-focus-within:from-custom-blue/20 group-focus-within:via-custom-blue/20 group-focus-within:to-custom-blue/20 transition-all duration-500 pointer-events-none"></div>
+                                    </div>
+                                </div>
+
+                                <div class="group">
+                                    <label class="block text-gray-800 text-lg font-medium mb-2">
+                                        Captcha
+                                    </label>
+
+                                    <!-- Box Captcha -->
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <canvas id="captchaCanvas" width="160" height="60" class="rounded-lg border bg-white"></canvas>
+
+                                        <!-- Tombol refresh -->
+                                        <button
+                                            type="button"
+                                            onclick="generateCaptcha()"
+                                            class="p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition flex items-center justify-center">
+                                            ↻
+                                        </button>
+                                    </div>
+
+                                    <!-- Input -->
+                                    <input
+                                        type="text"
+                                        id="captchaInput"
+                                        class="w-full px-4 py-4 bg-white/10 border border-black rounded-xl text-black placeholder-black/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-custom-blue"
+                                        placeholder="Masukkan captcha di atas">
+                                </div>
+
+
+                                <button
+                                    type="submit"
+                                    class="w-full py-4 bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-transparent relative overflow-hidden group">
+                                    <span class="relative z-10">Cek</span>
+                                    <div class="absolute inset-0 bg-blue-700/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="relative bg-white p-12 flex flex-col justify-center items-center text-center lg:min-h-[600px] overflow-hidden">
+                            <img
+                                src="https://pelaut.dephub.go.id/assets/images/validasipic.jpg"
+                                alt="Validasi"
+                                class="max-w-full h-auto">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <footer class="bg-gradient-to-br from-custom-teal/90 via-custom-teal-dark/90 to-custom-teal/90 border-t border-gray-200">
+                <div class="container mx-auto px-4 md:px-0 py-12">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-4">
+                        <div class="col-span-1 md:col-span-2 lg:col-span-2">
+                            <a href="#">
+                                <img class="h-10 mb-6" src="https://pelaut.dephub.go.id/assets/images/logo-kemenhub1.png" alt="Jual Bareng Logo">
+                            </a>
+                            <p class="text-white font-bold max-w-sm" data-lang-key="footer-desc">
+                                Direktorat Perkapalan dan Kepelautan
+                            </p>
+                            <p class="text-white max-w-sm" data-lang-key="footer-desc">
+                                Jl. Medan Merdeka Barat No 8
+                            </p>
+                            <p class="text-white max-w-sm" data-lang-key="footer-desc">
+                                Jakarta, Indonesia 10110
+                            </p>
+                            <p class="text-white max-w-sm" data-lang-key="footer-desc">
+                                Contact Center : 151
+                            </p>
+                            <p class="text-white max-w-sm" data-lang-key="footer-desc">
+                                Email : kepelautan@dephub.go.id
+                            </p>
+                            <div class="flex space-x-4 mt-4">
+                                <a href="#" class="text-white hover:text-blue-fb transition-colors">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path
+                                            d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84">
+                                        </path>
+                                    </svg>
+                                </a>
+                                <a href="#" class="text-white hover:text-blue-fb transition-colors">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </a>
+                                <a href="#" class="text-white hover:text-blue-fb transition-colors">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path
+                                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-400 mb-4">Menu</h3>
+                            <ul class="space-y-3">
+                                <li><a href="#" class="text-white hover:text-blue-fb transition-colors"
+                                        data-lang-key="footer-menu-home">Home</a></li>
+                                <li><a href="#"
+                                        class="text-white hover:text-blue-fb transition-colors"
+                                        data-lang-key="footer-menu-product">Information</a></li>
+                                <li><a href="#"
+                                        class="text-white hover:text-blue-fb transition-colors"
+                                        data-lang-key="footer-menu-plan">MoU</a></li>
+                                <li><a href="#"
+                                        class="text-white hover:text-blue-fb transition-colors"
+                                        data-lang-key="footer-menu-contact">Verification</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-400 mb-4" data-lang-key="footer-information">
+                                Information</h3>
+                            <ul class="space-y-2">
+                                <li><a href="#" class="text-white hover:text-blue-fb transition-colors">IMO (International Maritimes Organization)</a></li>
+                                <li><a href="#" class="text-white hover:text-blue-fb transition-colors">ILO (International Labour Organization)</a></li>
+                                <li><a href="#" class="text-white hover:text-blue-fb transition-colors">BPSDM Kemenhub RI</a></li>
+                                <li><a href="#" class="text-white hover:text-blue-fb transition-colors">INSA (Indonesia National Shipowners Association)</a></li>
+                                <li><a href="#" class="text-white hover:text-blue-fb transition-colors">BKI (Biro Klasifikasi Indonesia)</a></li>
+                                <li><a href="#" class="text-white hover:text-blue-fb transition-colors">JDIH Kemenhub</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-300 pt-6">
+                        <p class=" text-white">
+                            ©2025 Direktorat Perkapalan & Kepelautan, Direktorat Jenderal Perhubungan Laut, Kementerian Perhubungan Republik Indonesia <a href="#"
+                                class="text-blue-fb hover:underline"></a>
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        const button = document.getElementById("mobile-menu-button");
+        const menu = document.getElementById("mobile-menu");
+
+        button.addEventListener("click", (e) => {
+            e.stopPropagation();
+            menu.classList.toggle("hidden");
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!menu.classList.contains("hidden")) {
+                if (!menu.contains(e.target) && !button.contains(e.target)) {
+                    menu.classList.add("hidden");
+                }
+            }
+        });
+
+        let captchaText = "";
+
+        function generateCaptcha() {
+            const canvas = document.getElementById("captchaCanvas");
+            const ctx = canvas.getContext("2d");
+
+            // Background putih
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Generate karakter captcha acak
+            const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
+            captchaText = "";
+            for (let i = 0; i < 5; i++) {
+                captchaText += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+
+            // Gambar huruf satu per satu dengan style acak
+            for (let i = 0; i < captchaText.length; i++) {
+                const fontSize = Math.floor(Math.random() * 10) + 24; // ukuran random 24–34
+                const rotation = (Math.random() - 0.5) * 0.5; // rotasi acak -0.25 s/d 0.25 radian
+
+                ctx.font = `${fontSize}px Arial`;
+                ctx.fillStyle = `hsl(${Math.random() * 360}, 90%, 30%)`; // warna acak
+                ctx.save();
+                ctx.translate(20 + i * 25, 40); // posisi huruf
+                ctx.rotate(rotation);
+                ctx.fillText(captchaText[i], 0, 0);
+                ctx.restore();
+            }
+
+            // Tambahkan garis-garis acak (noise)
+            for (let i = 0; i < 6; i++) {
+                ctx.strokeStyle = `rgba(0,0,0,${Math.random() * 0.3})`;
+                ctx.beginPath();
+                ctx.moveTo(Math.random() * 160, Math.random() * 60);
+                ctx.lineTo(Math.random() * 160, Math.random() * 60);
+                ctx.stroke();
+            }
+        }
+
+        // Generate pertama kali
+        generateCaptcha();
+    </script>
+</body>
+
+</html>
